@@ -10,7 +10,12 @@
         "lint": "oxlint --fix",
         "format": "oxfmt --write"
     },
+    "dependencies": {
+        "daisyui": "^5.7.50",
+        "tailwindcss": "^4.3.4"
+    },
     "devDependencies": {
+        "@tailwindcss/vite": "^4.3.4",
         "@types/bun": "^1.4.4",
         "oxfmt": "^0.77.0",
         "oxlint": "^1.92.0",
