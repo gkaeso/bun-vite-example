@@ -23,7 +23,16 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "erasableSyntaxOnly": true,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+        /* JSX */
+        "jsx": "react-jsx",
+        "jsxImportSource": "@kitajs/html",
+        /* Plugins */
+        "plugins": [
+            {
+                "name": "@kitajs/ts-html-plugin"
+            }
+        ]
     },
     "include": [
         "src"
