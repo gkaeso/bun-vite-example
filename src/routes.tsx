@@ -1,5 +1,5 @@
-import { Home } from './pages/home';
+import { Home } from "./pages/home";
 
 export const routes: Record<string, () => JSX.Element> = {
-    '/': () => <Home />,
+    "/": () => <Home />,
 };

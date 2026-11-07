@@ -2,14 +2,8 @@
     "compilerOptions": {
         "target": "es2023",
         "module": "esnext",
-        "lib": [
-            "ES2023",
-            "DOM"
-        ],
-        "types": [
-            "vite/client",
-            "bun-types"
-        ],
+        "lib": ["ES2023", "DOM"],
+        "types": ["vite/client", "bun-types"],
         "allowArbitraryExtensions": true,
         "skipLibCheck": true,
         /* Bundler mode */
@@ -34,7 +28,5 @@
             }
         ]
     },
-    "include": [
-        "src"
-    ]
+    "include": ["src"]
 }

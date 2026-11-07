@@ -1,18 +1,18 @@
 // Production server (run after `bun run build`). Any runtime can replace it:
 // it only needs to call `routes[path]()` and serve the files in dist/.
-import { resolve, sep } from 'node:path';
-import { routes } from './routes';
+import { resolve, sep } from "node:path";
+import { routes } from "./routes";
 
-const dist = resolve('dist');
+const dist = resolve("dist");
 
 const server = Bun.serve({
     port: Number(process.env.PORT ?? 3000),
     async fetch(req) {
         const { pathname } = new URL(req.url);
         const route = routes[pathname];
-        if (req.method === 'GET' && route) {
+        if (req.method === "GET" && route) {
             return new Response(String(await route()), {
-                headers: { 'Content-Type': 'text/html; charset=utf-8' },
+                headers: { "Content-Type": "text/html; charset=utf-8" },
             });
         }
         const file = resolve(dist, `.${pathname}`);
@@ -22,7 +22,7 @@ const server = Bun.serve({
                 return new Response(asset);
             }
         }
-        return new Response('Not Found', { status: 404 });
+        return new Response("Not Found", { status: 404 });
     },
 });
 

@@ -7,19 +7,18 @@ import { defineConfig, type Plugin, type ViteDevServer } from "vite";
 const ssr = (): Plugin => {
     let server: ViteDevServer;
     return {
-        name: 'ssr',
+        name: "ssr",
         configureServer(s) {
             server = s;
             s.middlewares.use(async (req, res, next) => {
                 try {
-                    const { routes } = await s.ssrLoadModule('/src/routes.tsx');
-                    const route = routes[new URL(req.url ?? '/', 'http://localhost').pathname];
-                    if (req.method !== 'GET' || !route) {
+                    const { routes } = await s.ssrLoadModule("/src/routes.tsx");
+                    const route = routes[new URL(req.url ?? "/", "http://localhost").pathname];
+                    if (req.method !== "GET" || !route) {
                         return next();
                     }
                     const html = await s.transformIndexHtml(req.url!, String(await route()));
-                    res.setHeader('Content-Type', 'text/html; charset=utf-8')
-                        .end(html);
+                    res.setHeader("Content-Type", "text/html; charset=utf-8").end(html);
                 } catch (e) {
                     s.ssrFixStacktrace(e as Error);
                     next(e);
@@ -27,24 +26,22 @@ const ssr = (): Plugin => {
             });
         },
         hotUpdate({ file }) {
-            if (this.environment.name === 'ssr' && /\.tsx?$/.test(file)) {
-                server.environments.client.hot.send({ type: 'full-reload' });
+            if (this.environment.name === "ssr" && /\.tsx?$/.test(file)) {
+                server.environments.client.hot.send({ type: "full-reload" });
             }
         },
     };
 };
 
 export default defineConfig({
-    appType: 'custom',
+    appType: "custom",
     build: {
         manifest: true,
-        rollupOptions: { input: 'src/client.ts' },
+        rollupOptions: { input: "src/client.ts" },
     },
     esbuild: {
-        jsx: 'automatic',
-        jsxImportSource: '@kitajs/html',
+        jsx: "automatic",
+        jsxImportSource: "@kitajs/html",
     },
-    plugins: [
-        ssr(),
-    ],
+    plugins: [ssr()],
 });
